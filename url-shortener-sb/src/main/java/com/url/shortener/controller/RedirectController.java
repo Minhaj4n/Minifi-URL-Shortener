@@ -1,0 +1,46 @@
+package com.url.shortener.controller;
+
+import com.url.shortener.models.UrlMapping;
+import com.url.shortener.service.UrlMappingService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+
+/**
+ * Handles HTTP redirects for short URLs.
+ * Returns 302 (Found) for valid URLs, 404 (Not Found) otherwise.
+ */
+
+@RestController
+@AllArgsConstructor
+public class RedirectController {
+
+    private UrlMappingService urlMappingService;
+
+
+    /**
+     * Redirects a short URL to its original destination.
+     *
+     * @param shortUrl The shortened URL identifier (case-sensitive)
+     * @return HTTP 302 with Location header (if found),
+     *         HTTP 404 (if not found)
+     * @apiNote This is the core endpoint that enables the URL shortening functionality.
+     */
+
+    @GetMapping("/{shortUrl}")
+    public ResponseEntity<Void> redirect(@PathVariable String shortUrl){
+        UrlMapping urlMapping = urlMappingService.getOriginalUrl(shortUrl);
+        if (urlMapping != null) {
+            HttpHeaders headers  = new HttpHeaders();
+            headers .add("Location", urlMapping.getOriginalUrl());
+            return ResponseEntity.status(HttpStatus.FOUND).headers(headers).build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+}
