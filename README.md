@@ -93,9 +93,10 @@ minifi-url-shortener/
 
 ## 🖼️ Screenshots
 
-| Landing Page | Shortening Interface | Analytics Page | Home Page |
-|--------------|----------------------|----------------|
-| ![Landing](screenshots/landing.png) | ![Shorten](screenshots/shorten.png) | ![Analytics](screenshots/analytics.png) | ![Analytics](screenshots/homepage.png) |
+| Landing Page | Home Page | Shortening Interface | Analytics Page |
+|--------------|-----------|----------------------|----------------|
+| ![Landing](screenshots/landing.jpeg) | ![Home](screenshots/homepage.jpeg) | ![Shorten](screenshots/shorten.jpeg) | ![Analytics](screenshots/analytics.jpeg) |
+
 
 
 ---
